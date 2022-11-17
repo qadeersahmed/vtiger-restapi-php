@@ -103,6 +103,15 @@ class Vtiger
         );
         return $this->sendHttpRequest($data, 'GET');
     }
+    
+    public function userDetails(): object
+    {
+        $data = array(
+            'operation'     => 'me',
+            'sessionName'   => $this->sessionName
+        );
+        return $this->sendHttpRequest($data, 'GET');
+    }
 
     public function retrieveRelated(string $id, string $targetLabel, string $targetModule): object
     {
