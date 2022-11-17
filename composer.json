@@ -1,5 +1,5 @@
 {
-    "name": "jaime/vtiger-restapi-php",
+    "name": "qadeersahmed/vtiger-restapi-php",
     "description": "Vtiger REST API client for PHP",
     "type": "library",
     "require-dev": {
@@ -8,13 +8,13 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Jaime\\": "src/"
+            "VTigerClient\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "Jaime",
-            "email": "jayepesviloria@gmail.com"
+            "name": "Qadeer Ahmed",
+            "email": "qadeersahmed@gmail.com"
         }
     ],
     "require": {
