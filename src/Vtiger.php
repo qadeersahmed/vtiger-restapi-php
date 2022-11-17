@@ -103,15 +103,6 @@ class Vtiger
         );
         return $this->sendHttpRequest($data, 'GET');
     }
-    
-    public function userDetails(): object
-    {
-        $data = array(
-            'operation'     => 'me',
-            'sessionName'   => $this->sessionName
-        );
-        return $this->sendHttpRequest($data, 'GET');
-    }
 
     public function retrieveRelated(string $id, string $targetLabel, string $targetModule): object
     {
@@ -147,8 +138,9 @@ class Vtiger
                 $criteria[] = "{$param} = '{$value}'";
             }
 
-            $query .= sprintf(' WHERE %s ;', implode(" AND ", $criteria));
+            $query .= sprintf(' WHERE %s ', implode(" AND ", $criteria));
         }
+        $query .= ' ;';
         return $query;
     }
 
