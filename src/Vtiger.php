@@ -1,6 +1,6 @@
 <?php
 
-namespace Jaime;
+namespace VTigerClient;
 
 class Vtiger
 {
