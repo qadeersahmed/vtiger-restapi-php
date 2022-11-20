@@ -135,7 +135,8 @@ class Vtiger
 
         if (!empty($params)) {
             foreach ($params as $param => $value) {
-                $criteria[] = "{$param} = '{$value}'";
+                $escaped_value = str_replace("'", "''", $value);
+                $criteria[] = "{$param} = '{$escaped_value}'";
             }
 
             $query .= sprintf(' WHERE %s ', implode(" AND ", $criteria));
