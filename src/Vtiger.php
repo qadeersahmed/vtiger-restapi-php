@@ -7,6 +7,7 @@ class Vtiger
     public $serveraddress;
     public $userName;
     public $userAccessKey;
+    public $token;
     public $sessionName;
 
     public function __construct($serveraddress, $userName, $userAccessKey)
@@ -30,11 +31,11 @@ class Vtiger
 
     private function login(): void
     {
-        $token = $this->getToken();
+        $this->token = $this->getToken();
         $data = array(
             'operation' => 'login',
             'username'  => $this->userName,
-            'accessKey' => md5($token . $this->userAccessKey),
+            'accessKey' => md5($this->token . $this->userAccessKey),
         );
         $result = $this->sendHttpRequest($data, 'POST');
         $this->sessionName = $result->result->sessionName;
