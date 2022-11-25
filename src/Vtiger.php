@@ -15,7 +15,11 @@ class Vtiger
         $this->serveraddress = $serveraddress . "/webservice.php";
         $this->userName = $userName;
         $this->userAccessKey = $userAccessKey;
-        $this->login();
+        try{
+            $this->login();
+        } catch(Exception $e){
+            throw $e;
+        }
     }
 
     private function getToken(): string
