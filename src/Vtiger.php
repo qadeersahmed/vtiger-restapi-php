@@ -7,19 +7,14 @@ class Vtiger
     public $serveraddress;
     public $userName;
     public $userAccessKey;
-    public $token;
-    public $sessionName;
+    public $token = null;
+    public $sessionName = null;
 
     public function __construct($serveraddress, $userName, $userAccessKey)
     {
         $this->serveraddress = $serveraddress . "/webservice.php";
         $this->userName = $userName;
         $this->userAccessKey = $userAccessKey;
-        try{
-            $this->login();
-        } catch(Exception $e){
-            throw $e;
-        }
     }
 
     private function getToken(): string
@@ -47,6 +42,7 @@ class Vtiger
 
     public function create(array $params, string $module): object
     {
+        if(empty($this->sessionName)) $this->login();
         $element = json_encode($params);
         $data = array(
             'operation'   => 'create',
@@ -59,6 +55,7 @@ class Vtiger
 
     public function update(array $params): object
     {
+        if(empty($this->sessionName)) $this->login();
         $element = json_encode($params);
         $data = array(
             'operation'   => 'update',
@@ -70,6 +67,7 @@ class Vtiger
 
     public function retrieve(string $id): object
     {
+        if(empty($this->sessionName)) $this->login();
         $data = array(
             'operation'     => 'retrieve',
             'sessionName'   => $this->sessionName,
@@ -80,6 +78,7 @@ class Vtiger
 
     public function revise(array $params): object
     {
+        if(empty($this->sessionName)) $this->login();
         $element = json_encode($params);
 
         $data = array(
@@ -92,6 +91,7 @@ class Vtiger
 
     public function describe(string $module): object
     {
+        if(empty($this->sessionName)) $this->login();
         $data = array(
             'operation'     => 'describe',
             'sessionName'   => $this->sessionName,
@@ -102,6 +102,7 @@ class Vtiger
 
     public function listTypes(): object
     {
+        if(empty($this->sessionName)) $this->login();
         $data = array(
             'operation'     => 'listtypes',
             'sessionName'   => $this->sessionName
@@ -111,6 +112,7 @@ class Vtiger
 
     public function retrieveRelated(string $id, string $targetLabel, string $targetModule): object
     {
+        if(empty($this->sessionName)) $this->login();
         $data = array(
             'operation'     => 'retrieve_related',
             'sessionName'   => $this->sessionName,
@@ -123,6 +125,7 @@ class Vtiger
 
     public function query(string $module, array $params, array $select = []): object
     {
+        if(empty($this->sessionName)) $this->login();
         $query = $this->getQueryString($module, $params, $select);
         $data = array(
             'operation'     => 'query',
